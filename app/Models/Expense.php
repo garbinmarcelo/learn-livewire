@@ -10,10 +10,21 @@ class Expense extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'description',
         'type',
         'amount',
     ];
+
+    public function getAmountAttribute($prop)
+    {
+        return $this->attributes['amount'] / 100;
+    }
+
+    public function setAmountAttribute($prop)
+    {
+        return $this->attributes['amount']  = $prop * 100;
+    }
 
     public function user()
     {
