@@ -14,7 +14,11 @@ class Expense extends Model
         'description',
         'type',
         'amount',
+        'photo',
+        'expense_date',
     ];
+
+    protected $dates = ['expense_date'];
 
     public function getAmountAttribute($prop)
     {
@@ -24,6 +28,11 @@ class Expense extends Model
     public function setAmountAttribute($prop)
     {
         return $this->attributes['amount']  = $prop * 100;
+    }
+
+    public function setExpenseDateAttribute($prop)
+    {
+        return $this->attributes['expense_date']  = (\DateTime::createFromFormat('d/m/Y H:i:s', $prop))->format('Y-m-d H:i:s');
     }
 
     public function user()
