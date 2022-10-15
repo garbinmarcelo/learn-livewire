@@ -10,6 +10,10 @@ use \App\Http\Livewire\Expense\{
     ExpenseCreate,
     ExpenseEdit
 };
+use \App\Http\Livewire\Plan\{
+    PlanList,
+    PlanCreate
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +46,6 @@ Route::middleware([
     'verified',
 ])->group(function(){
     Route::prefix('expenses')->name('expenses.')->group(function(){
-
         Route::get('/', ExpenseList::class)->name('index');
         Route::get('/create', ExpenseCreate::class)->name('create');
         Route::get('/edit/{expense}', ExpenseEdit::class)->name('edit');
@@ -58,6 +61,10 @@ Route::middleware([
 
             return response($image)->header('Content-Type', $mimeType);
         })->name('photo');
-
     });
+});
+
+Route::prefix('plans')->name('plans.')->group(function(){
+    Route::get('/', PlanList::class)->name('index');
+    Route::get('/create', PlanCreate::class)->name('create');
 });
