@@ -17,6 +17,16 @@ class Plan extends Model
         'reference',
     ];
 
+    public function getPriceAttribute($prop)
+    {
+        return $this->attributes['price'] / 100;
+    }
+
+    public function setPriceAttribute($prop)
+    {
+        return $this->attributes['price']  = $prop * 100;
+    }
+
     public function features()
     {
         return $this->hasMany(Feature::class);
